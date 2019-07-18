@@ -1,8 +1,4 @@
-# A key value store using Github.
 
-## Usage
-
-```
 const GithubDb=require("github-db");
 
 const db= GithubDb({db:"test-db",token:"test"}); 
@@ -22,5 +18,3 @@ const db= GithubDb({db:"test-db",token:"test"});
         console.error(error);
     }
 })()
-```
-
