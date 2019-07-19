@@ -17,11 +17,11 @@ function Client({ db, token }) {
       hanlderError(error);
     }
   }
-  async function add(document, payload) {
+  async function add({document,identifier}, payload) {
     try {
       await validate();
       const resp = await axios.post(`${url}/add`, {
-        db: options.db,
+        db: options.db,identifier,
         token,
         document,
         payload
@@ -31,7 +31,7 @@ function Client({ db, token }) {
       hanlderError(error);
     }
   }
-  async function update(document, identifier, payload) {
+  async function update({document,identifier} , payload) {
     try {
       await validate();
       const resp = await axios.post(`${url}/update`, {
@@ -46,7 +46,7 @@ function Client({ db, token }) {
       hanlderError(error);
     }
   }
-  async function _delete(document, identifier) {
+  async function _delete({document,identifier}) {
     try {
       await validate();
       const resp = await axios.post(`${url}/delete`, {
@@ -60,7 +60,7 @@ function Client({ db, token }) {
       hanlderError(error);
     }
   }
-  async function fetchOne(document, identifier) {
+  async function fetchOne({document,identifier} ) {
     try {
       await validate();
       const resp = await axios.get(`${url}/fetchOne`, {
@@ -71,11 +71,11 @@ function Client({ db, token }) {
       hanlderError(error);
     }
   }
-  async function fetchAll(document) {
+  async function fetchAll({document,identifier}) {
     try {
       await validate();
       const resp = await axios.get(`${url}/fetchAll`, {
-        params: { db: options.db, token, document }
+        params: { db: options.db, token,identifier, document }
       });
       return resp.data;
     } catch (error) {
@@ -92,7 +92,7 @@ function Client({ db, token }) {
 }
 function hanlderError(error) {
   if (error.response) {
-    throw new Error(error.response.data);
+    throw new Error(error.response.data.message);
   } else if (error.request) {
     throw error.request;
   } else {
