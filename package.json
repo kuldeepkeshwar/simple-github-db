@@ -1,5 +1,5 @@
 {
-  "name": "github-db",
+  "name": "simple-github-db",
   "version": "1.0.0",
   "description": "a key value database ",
   "main": "index.js",
@@ -8,14 +8,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/kuldeepkeshwar/github-db.git"
+    "url": "git+https://github.com/kuldeepkeshwar/simple-github-db.git"
   },
   "author": "kuldeepkeshwar",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/kuldeepkeshwar/github-db/issues"
+    "url": "https://github.com/kuldeepkeshwar/simple-github-db/issues"
   },
-  "homepage": "https://github.com/kuldeepkeshwar/github-db#readme",
+  "homepage": "https://github.com/kuldeepkeshwar/simple-github-db#readme",
   "dependencies": {
     "axios": "^0.19.0"
   }

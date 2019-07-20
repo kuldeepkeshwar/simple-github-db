@@ -1,11 +1,11 @@
 # A simpe key value store using Github.
 
 ## Install
-`npm install github-db`
+`npm install simple-github-db`
 ## Usage
 
 ```
-const GithubDb=require("github-db");
+const GithubDb=require("simple-github-db");
 
 const db = GithubDb({ db: process.env.DB_NAME, token: process.env.DB_TOKEN });
 (async function(){
