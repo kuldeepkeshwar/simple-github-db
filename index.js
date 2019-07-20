@@ -4,14 +4,13 @@ const url = `https://github-db.glitch.me/db/api`;
 
 function Client({ db, token }) {
   const options = { db, token };
-  let validated = false;
-  async function validate() {
+  let auth_token;
+  async function auth() {
     try {
-      if (!validated) {
-        const { data } = await axios.get(`${url}/validate`, {
-          params: options
-        });
-        validated = data.valid;
+      if (!auth_token) {
+        const {data} = await axios.post(`${url}/token`, options);
+        auth_token = data.token;
+        axios.defaults.headers.common['Authorization'] = `Bearer ${auth_token}`;
       }
     } catch (error) {
       hanlderError(error);
@@ -19,7 +18,7 @@ function Client({ db, token }) {
   }
   async function add({document,identifier}, payload) {
     try {
-      await validate();
+      await auth();
       const resp = await axios.post(`${url}/add`, {
         db: options.db,identifier,
         token,
@@ -33,7 +32,7 @@ function Client({ db, token }) {
   }
   async function update({document,identifier} , payload) {
     try {
-      await validate();
+      await auth();
       const resp = await axios.post(`${url}/update`, {
         db: options.db,
         token,
@@ -48,7 +47,7 @@ function Client({ db, token }) {
   }
   async function _delete({document,identifier}) {
     try {
-      await validate();
+      await auth();
       const resp = await axios.post(`${url}/delete`, {
         db: options.db,
         token,
@@ -62,10 +61,8 @@ function Client({ db, token }) {
   }
   async function fetchOne({document,identifier} ) {
     try {
-      await validate();
-      const resp = await axios.get(`${url}/fetchOne`, {
-        params: { db: options.db, token, document, identifier }
-      });
+      await auth();
+      const resp = await axios.post(`${url}/fetchOne`, { db: options.db, token, document, identifier });
       return resp.data;
     } catch (error) {
       hanlderError(error);
@@ -73,10 +70,8 @@ function Client({ db, token }) {
   }
   async function fetchAll({document,identifier}) {
     try {
-      await validate();
-      const resp = await axios.get(`${url}/fetchAll`, {
-        params: { db: options.db, token,identifier, document }
-      });
+      await auth();
+      const resp = await axios.post(`${url}/fetchAll`, { db: options.db, token,identifier, document });
       return resp.data;
     } catch (error) {
       hanlderError(error);

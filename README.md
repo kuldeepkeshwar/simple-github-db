@@ -1,11 +1,13 @@
-# A key value store using Github.
+# A simpe key value store using Github.
 
+## Install
+`npm install github-db`
 ## Usage
 
 ```
 const GithubDb=require("github-db");
 
-const db= GithubDb({db:"test-db",token:"test"}); 
+const db = GithubDb({ db: process.env.DB_NAME, token: process.env.DB_TOKEN });
 (async function(){
     try {
         const {identifier}=await db.add({document:"user"},{name:"John"});
@@ -29,3 +31,5 @@ const db= GithubDb({db:"test-db",token:"test"});
 })()
 ```
 
+### Warning
+Meant to be used for side-projects, it doesn't scale or fulfil a fully-fledged database needs.
