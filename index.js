@@ -94,5 +94,13 @@ function hanlderError(error) {
     throw new Error(error.message);
   }
 }
-
+async function createDatabase(name,token) {
+  try {
+    const resp = await axios.post(`${url}/create-database`, { name,token});
+    return resp.data;
+  } catch (error) {
+    hanlderError(error);
+  }
+}
+Client.createDatabase=createDatabase;
 module.exports = Client;
