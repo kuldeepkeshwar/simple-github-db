@@ -7,24 +7,30 @@
 ```
 const GithubDb=require("simple-github-db");
 
-const db = GithubDb({ db: process.env.DB_NAME, token: process.env.DB_TOKEN });
+async function test(){
+    const db= GithubDb({db:process.env.db,token:process.env.token}); 
+
+    const {identifier}=await db.add({document:"user"},{name:"John"});
+    console.log("added user", identifier);
+    
+    const user=await db.fetchOne({document:"user",identifier});
+    console.log("fetched user", user);
+
+    const updated=await db.update({document:"user",identifier},{name:"John Cena"});
+    console.log("updated user", updated);
+    
+    const users=await db.fetchAll({document:"user"});
+    console.log("fetched users", users);
+    for (const {identifier} of users) {
+        const result=await db.delete({document:"user",identifier});
+        console.log("delete users", result);
+    }
+}  
+
 (async function(){
     try {
-        const {identifier}=await db.add({document:"user"},{name:"John"});
-        console.log("added user", identifier);
-        
-        const user=await db.fetchOne({document:"user",identifier});
-        console.log("fetched user", user);
-
-        const updated=await db.update({document:"user",identifier},{name:"John Cena"});
-        console.log("updated user", updated);
-        
-        const users=await db.fetchAll({document:"user"});
-        console.log("fetched users", users);
-        for (const {identifier} of users) {
-            const result=await db.delete({document:"user",identifier});
-            console.log("delete users", result);
-        }
+        await GithubDb.createDatabase(process.env.db,process.env.token)
+        await test();
     } catch (error) {
         console.error(error);
     }

@@ -1,9 +1,9 @@
 
 const GithubDb=require("./index");
 
-const db= GithubDb({db:process.env.db,token:process.env.token}); 
-
 async function test(){
+    const db= GithubDb({db:process.env.db,token:process.env.token}); 
+
     const {identifier}=await db.add({document:"user"},{name:"John"});
     console.log("added user", identifier);
     
@@ -23,6 +23,7 @@ async function test(){
 
 (async function(){
     try {
+        await GithubDb.createDatabase(process.env.db,process.env.token)
         await test();
     } catch (error) {
         console.error(error);
