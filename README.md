@@ -33,3 +33,7 @@ const db = GithubDb({ db: process.env.DB_NAME, token: process.env.DB_TOKEN });
 
 ### Warning
 Meant to be used for side-projects, it doesn't scale or fulfil a fully-fledged database needs.
+
+#### like it?
+
+⭐️ this repo
