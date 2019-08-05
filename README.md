@@ -18,23 +18,23 @@
 
 ```
 #### CRUD Operation
-```
+```diff
 async function test(){
     const db= GithubDb({db:<DATABASE_NAME>,token:<TOKEN>}); 
 
-    const {identifier}=await db.add({document:"user"},{name:"John"});
++   const {identifier}=await db.add({document:"user"},{name:"John"});
     console.log("added user", identifier);
     
-    const user=await db.fetchOne({document:"user",identifier});
++   const user=await db.fetchOne({document:"user",identifier});
     console.log("fetched user", user);
 
-    const updated=await db.update({document:"user",identifier},{name:"John Cena"});
++   const updated=await db.update({document:"user",identifier},{name:"John Cena"});
     console.log("updated user", updated);
     
-    const users=await db.fetchAll({document:"user"});
++   const users=await db.fetchAll({document:"user"});
     console.log("fetched users", users);
     for (const {identifier} of users) {
-        const result=await db.delete({document:"user",identifier});
++       const result=await db.delete({document:"user",identifier});
         console.log("delete users", result);
     }
 }  
