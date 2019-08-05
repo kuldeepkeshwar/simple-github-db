@@ -5,11 +5,22 @@
 `npm install simple-github-db`
 ## Usage
 
+#### Create database
 ```
-const GithubDb=require("simple-github-db");
+(async function(){
+    try {
+        await GithubDb.createDatabase(<DATABASE_NAME>,<TOKEN>)
+        await test();
+    } catch (error) {
+        console.error(error);
+    }
+})()
 
+```
+#### CRUD Operation
+```
 async function test(){
-    const db= GithubDb({db:process.env.db,token:process.env.token}); 
+    const db= GithubDb({db:<DATABASE_NAME>,token:<TOKEN>}); 
 
     const {identifier}=await db.add({document:"user"},{name:"John"});
     console.log("added user", identifier);
@@ -30,7 +41,6 @@ async function test(){
 
 (async function(){
     try {
-        await GithubDb.createDatabase(process.env.db,process.env.token)
         await test();
     } catch (error) {
         console.error(error);
