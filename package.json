@@ -1,6 +1,6 @@
 {
   "name": "simple-github-db",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "a key value database ",
   "main": "index.js",
   "scripts": {
